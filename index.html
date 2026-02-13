@@ -20,41 +20,36 @@
 ymaps.ready(init);
 
 async function init() {
-    // Создаём карту с начальным центром (центр Москвы)
     const map = new ymaps.Map("map", {
         center: [55.76, 37.64],
         zoom: 10
     });
 
-    // Загружаем твой JSON с задачами
     const tasks = await fetch("tasks.json").then(r => r.json());
 
-    // Обходим каждую задачу
     for (let t of tasks) {
         if (!t.address) continue;
 
-        try {
-            // Геокодируем адрес
-            const res = await ymaps.geocode(t.address);
-            const first = res.geoObjects.get(0);
+        // геокодируем через Promise
+        ymaps.geocode(t.address).then(function (res) {
+            const firstGeoObject = res.geoObjects.get(0);
+            if (!firstGeoObject) return;
 
-            if (!first) continue;
+            const coords = firstGeoObject.geometry.getCoordinates();
 
-            const coords = first.geometry.getCoordinates();
-
-            // Создаём метку
             const placemark = new ymaps.Placemark(coords, {
                 balloonContentHeader: `ID: ${t.id}`,
-                balloonContentBody: `Статус: ${t.status}<br>Адрес: ${t.address}`
+                balloonContentBody: `Статус: ${t.status}<br>${t.address}`
+            }, {
+                preset: "islands#redDotIcon"
             });
 
             map.geoObjects.add(placemark);
-        } catch (e) {
-            console.error("Ошибка геокодирования:", t.address, e);
-        }
+        });
     }
 }
 </script>
+
 
 </body>
 </html>
