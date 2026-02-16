@@ -3,12 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Карта задач Helpdesk</title>
+
 <style>
   body { margin: 0; padding: 0; }
   #map { width: 100%; height: 100vh; }
+
+  .balloon-btn {
+      display: inline-block;
+      padding: 8px 12px;
+      margin: 4px 4px 0 0;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 14px;
+  }
+
+  .btn-yandex {
+      background: #ffcc00;
+      color: #000;
+  }
+
+  .btn-intra {
+      background: #2c7be5;
+      color: #fff;
+  }
 </style>
 
-<!-- Яндекс API с твоим ключом -->
+<!-- Яндекс API -->
 <script src="https://api-maps.yandex.ru/2.1/?apikey=dc60a9c5-3268-40d8-9bf7-faa1168a1b70&lang=ru_RU" type="text/javascript"></script>
 
 </head>
@@ -20,6 +41,7 @@
 ymaps.ready(init);
 
 async function init() {
+
     const map = new ymaps.Map("map", {
         center: [55.76, 37.64],
         zoom: 10
@@ -30,16 +52,35 @@ async function init() {
     for (let t of tasks) {
         if (!t.address) continue;
 
-        // геокодируем через Promise
         ymaps.geocode(t.address).then(function (res) {
+
             const firstGeoObject = res.geoObjects.get(0);
             if (!firstGeoObject) return;
 
             const coords = firstGeoObject.geometry.getCoordinates();
 
+            const addressEncoded = encodeURIComponent(t.address);
+            const yandexLink = `https://yandex.ru/maps/?text=${addressEncoded}`;
+            const intraLink = `https://helpdesk.f2c.ru/Task/View/${t.id}`;
+
+            const balloonContent = `
+                <div style="font-size:14px;">
+                    <b>Заявка #${t.id}</b><br>
+                    Статус: ${t.status}<br>
+                    ${t.address}<br><br>
+
+                    <a href="${yandexLink}" target="_blank" class="balloon-btn btn-yandex">
+                        📍 Открыть в Яндекс
+                    </a>
+
+                    <a href="${intraLink}" target="_blank" class="balloon-btn btn-intra">
+                        🛠 Открыть в Интре
+                    </a>
+                </div>
+            `;
+
             const placemark = new ymaps.Placemark(coords, {
-                balloonContentHeader: `ID: ${t.id}`,
-                balloonContentBody: `Статус: ${t.status}<br>${t.address}`
+                balloonContent: balloonContent
             }, {
                 preset: "islands#redDotIcon"
             });
@@ -49,7 +90,6 @@ async function init() {
     }
 }
 </script>
-
 
 </body>
 </html>
