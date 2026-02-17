@@ -8,14 +8,20 @@
   body { margin: 0; padding: 0; }
   #map { width: 100%; height: 100vh; }
 
+  .balloon-task {
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #ddd;
+  }
+
   .balloon-btn {
       display: inline-block;
-      padding: 8px 12px;
+      padding: 6px 10px;
       margin: 4px 4px 0 0;
       border-radius: 6px;
       font-weight: bold;
       text-decoration: none;
-      font-size: 14px;
+      font-size: 13px;
   }
 
   .btn-yandex {
@@ -29,7 +35,6 @@
   }
 </style>
 
-<!-- Яндекс API -->
 <script src="https://api-maps.yandex.ru/2.1/?apikey=dc60a9c5-3268-40d8-9bf7-faa1168a1b70&lang=ru_RU" type="text/javascript"></script>
 
 </head>
@@ -49,44 +54,76 @@ async function init() {
 
     const tasks = await fetch("tasks.json").then(r => r.json());
 
+    const grouped = {}; // сюда будем складывать заявки по координатам
+
+    // --- ГЕОКОДИРУЕМ И ГРУППИРУЕМ ---
     for (let t of tasks) {
+
         if (!t.address) continue;
 
-        ymaps.geocode(t.address).then(function (res) {
+        try {
+            const geo = await ymaps.geocode(t.address);
+            const obj = geo.geoObjects.get(0);
+            if (!obj) continue;
 
-            const firstGeoObject = res.geoObjects.get(0);
-            if (!firstGeoObject) return;
+            const coords = obj.geometry.getCoordinates();
 
-            const coords = firstGeoObject.geometry.getCoordinates();
+            // ключ — округлённые координаты
+            const key = coords[0].toFixed(6) + "," + coords[1].toFixed(6);
+
+            if (!grouped[key]) {
+                grouped[key] = {
+                    coords: coords,
+                    address: t.address,
+                    tasks: []
+                };
+            }
+
+            grouped[key].tasks.push(t);
+
+        } catch (e) {
+            console.log("Ошибка геокодирования:", t.address);
+        }
+    }
+
+    // --- СОЗДАЁМ МЕТКИ ---
+    for (let key in grouped) {
+
+        const group = grouped[key];
+
+        let balloonContent = `<div style="font-size:14px;"><b>${group.address}</b><br><br>`;
+
+        for (let t of group.tasks) {
 
             const addressEncoded = encodeURIComponent(t.address);
             const yandexLink = `https://yandex.ru/maps/?text=${addressEncoded}`;
             const intraLink = `https://helpdesk.f2c.ru/Task/View/${t.id}`;
 
-            const balloonContent = `
-                <div style="font-size:14px;">
+            balloonContent += `
+                <div class="balloon-task">
                     <b>Заявка #${t.id}</b><br>
                     Статус: ${t.status}<br>
-                    ${t.address}<br><br>
 
                     <a href="${yandexLink}" target="_blank" class="balloon-btn btn-yandex">
-                        📍 Открыть в Яндекс
+                        📍 Яндекс
                     </a>
 
                     <a href="${intraLink}" target="_blank" class="balloon-btn btn-intra">
-                        🛠 Открыть в Интре
+                        🛠 Интра
                     </a>
                 </div>
             `;
+        }
 
-            const placemark = new ymaps.Placemark(coords, {
-                balloonContent: balloonContent
-            }, {
-                preset: "islands#redDotIcon"
-            });
+        balloonContent += `</div>`;
 
-            map.geoObjects.add(placemark);
+        const placemark = new ymaps.Placemark(group.coords, {
+            balloonContent: balloonContent
+        }, {
+            preset: "islands#redDotIcon"
         });
+
+        map.geoObjects.add(placemark);
     }
 }
 </script>
