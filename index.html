@@ -49,14 +49,26 @@ async function init() {
 
     const map = new ymaps.Map("map", {
         center: [55.76, 37.64],
-        zoom: 10
+        zoom: 10,
+        controls: ['zoomControl', 'geolocationControl']
     });
 
+    // --- АВТОМАТИЧЕСКИ ЗАПУСКАЕМ ГЕОЛОКАЦИЮ ---
+    map.controls.get('geolocationControl').events.add('locationchange', function (e) {
+        const position = e.get('position');
+        if (position) {
+            map.setCenter(position, 13);
+        }
+    });
+
+    // имитируем нажатие кнопки
+    map.controls.get('geolocationControl').geolocate();
+
+    // --- ЗАГРУЖАЕМ ЗАЯВКИ ---
     const tasks = await fetch("tasks.json").then(r => r.json());
 
-    const grouped = {}; // сюда будем складывать заявки по координатам
+    const grouped = {};
 
-    // --- ГЕОКОДИРУЕМ И ГРУППИРУЕМ ---
     for (let t of tasks) {
 
         if (!t.address) continue;
@@ -67,8 +79,6 @@ async function init() {
             if (!obj) continue;
 
             const coords = obj.geometry.getCoordinates();
-
-            // ключ — округлённые координаты
             const key = coords[0].toFixed(6) + "," + coords[1].toFixed(6);
 
             if (!grouped[key]) {
@@ -86,7 +96,6 @@ async function init() {
         }
     }
 
-    // --- СОЗДАЁМ МЕТКИ ---
     for (let key in grouped) {
 
         const group = grouped[key];
@@ -130,4 +139,3 @@ async function init() {
 
 </body>
 </html>
-
