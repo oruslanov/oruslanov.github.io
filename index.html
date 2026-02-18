@@ -53,16 +53,18 @@ async function init() {
         controls: ['zoomControl', 'geolocationControl']
     });
 
-    // --- АВТОМАТИЧЕСКИ ЗАПУСКАЕМ ГЕОЛОКАЦИЮ ---
-    map.controls.get('geolocationControl').events.add('locationchange', function (e) {
-        const position = e.get('position');
-        if (position) {
-            map.setCenter(position, 13);
-        }
-    });
+    // --- АВТОГЕОЛОКАЦИЯ ПРАВИЛЬНЫМ СПОСОБОМ ---
+    try {
+        const result = await ymaps.geolocation.get({
+            provider: 'browser',
+            mapStateAutoApply: true
+        });
 
-    // имитируем нажатие кнопки
-    map.controls.get('geolocationControl').geolocate();
+        map.geoObjects.add(result.geoObjects);
+
+    } catch (e) {
+        console.log("Геолокация не разрешена");
+    }
 
     // --- ЗАГРУЖАЕМ ЗАЯВКИ ---
     const tasks = await fetch("tasks.json").then(r => r.json());
