@@ -128,11 +128,12 @@ async function init() {
 
         balloonContent += `</div>`;
 
-        const placemark = new ymaps.Placemark(coords, {
-                balloonContent: balloonContent
-            }, {
-                preset: "islands#redDotIcon"
-            });
+        const placemark = new ymaps.Placemark(group.coords, {
+            balloonContent: balloonContent
+        }, {
+            preset: "islands#redDotIcon"
+        });
+
         map.geoObjects.add(placemark);
     }
 }
@@ -140,8 +141,3 @@ async function init() {
 
 </body>
 </html>
-
-
-
-
-
