@@ -128,17 +128,16 @@ async function init() {
 
         balloonContent += `</div>`;
 
-        const placemark = new ymaps.Placemark(group.coords, {
-            balloonContent: balloonContent
-        }, {
-            preset: "islands#redDotIcon"
-            iconShape: {
-              type: 'Circle',
-              coordinates: [0, 0],
-              radius: 30
+        var placemark = new ymaps.Placemark(
+            [55.76, 37.64],
+            {},
+            {
+            iconLayout: 'default#image',
+            iconImageHref: 'icon.svg',
+            iconImageSize: [60, 60],   // ← увеличиваем
+            iconImageOffset: [-30, -60]
             }
-        });
-
+        );
         map.geoObjects.add(placemark);
     }
 }
@@ -146,5 +145,6 @@ async function init() {
 
 </body>
 </html>
+
 
 
