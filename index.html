@@ -131,7 +131,12 @@ async function init() {
         const placemark = new ymaps.Placemark(group.coords, {
             balloonContent: balloonContent
         }, {
-            preset: "islands#redCircleDotIcon"
+            preset: "islands#redDotIcon"
+            iconShape: {
+              type: 'Circle',
+              coordinates: [0, 0],
+              radius: 30
+            }
         });
 
         map.geoObjects.add(placemark);
@@ -141,4 +146,5 @@ async function init() {
 
 </body>
 </html>
+
 
