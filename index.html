@@ -53,7 +53,6 @@ async function init() {
         controls: ['zoomControl', 'geolocationControl']
     });
 
-    // --- АВТОГЕОЛОКАЦИЯ ПРАВИЛЬНЫМ СПОСОБОМ ---
     try {
         const result = await ymaps.geolocation.get({
             provider: 'browser',
@@ -66,17 +65,16 @@ async function init() {
         console.log("Геолокация не разрешена");
     }
 
-    // --- ЗАГРУЖАЕМ ЗАЯВКИ ---
     const tasks = await fetch("tasks.json").then(r => r.json());
 
     const grouped = {};
 
     for (let t of tasks) {
 
-        if (!t.address) continue;
+        if (!t.organization_address) continue;
 
         try {
-            const geo = await ymaps.geocode(t.address);
+            const geo = await ymaps.geocode(t.organization_address);
             const obj = geo.geoObjects.get(0);
             if (!obj) continue;
 
@@ -86,7 +84,7 @@ async function init() {
             if (!grouped[key]) {
                 grouped[key] = {
                     coords: coords,
-                    address: t.address,
+                    address: t.organization_address,
                     tasks: []
                 };
             }
@@ -94,7 +92,7 @@ async function init() {
             grouped[key].tasks.push(t);
 
         } catch (e) {
-            console.log("Ошибка геокодирования:", t.address);
+            console.log("Ошибка геокодирования:", t.organization_address);
         }
     }
 
@@ -102,25 +100,45 @@ async function init() {
 
         const group = grouped[key];
 
-        let balloonContent = `<div style="font-size:14px;"><b>${group.address}</b><br><br>`;
+        let balloonContent = `<div style="font-size:14px;">
+            <b>${group.address}</b><br><br>`;
 
         for (let t of group.tasks) {
 
-            const addressEncoded = encodeURIComponent(t.address);
+            const addressEncoded = encodeURIComponent(group.address);
             const yandexLink = `https://yandex.ru/maps/?text=${addressEncoded}`;
-            const intraLink = `https://helpdesk.f2c.ru/Task/View/${t.id}`;
+
+            const bitrixLink = `https://f2c.bitrix24.ru/workgroups/group/173/tasks/task/view/${t.bitrix_id}/`;
+
+            let phone = t.contact_phone || "";
+            let phoneClean = phone.replace(/[^+\d]/g, "");
 
             balloonContent += `
                 <div class="balloon-task">
-                    <b>Заявка #${t.id}</b><br>
-                    Статус: ${t.status}<br>
+                    <b>Заявка #${t.bitrix_id}</b><br>
+
+                    Статус: ${t.status || "—"}<br><br>
+
+                    <div>
+                        <b>Контакт</b><br>
+
+                        Имя: ${t.contact_name ? t.contact_name : "Неизвестно"}<br>
+
+                        Телефон: ${
+                            phone
+                            ? `<a href="tel:${phoneClean}">${phone}</a>`
+                            : "Неизвестно"
+                        }
+                    </div>
+
+                    <br>
 
                     <a href="${yandexLink}" target="_blank" class="balloon-btn btn-yandex">
                         📍 Яндекс
                     </a>
 
-                    <a href="${intraLink}" target="_blank" class="balloon-btn btn-intra">
-                        🛠 Интра
+                    <a href="${bitrixLink}" target="_blank" class="balloon-btn btn-intra">
+                        🛠 Битрикс
                     </a>
                 </div>
             `;
@@ -128,11 +146,12 @@ async function init() {
 
         balloonContent += `</div>`;
 
-        const placemark = new ymaps.Placemark(coords, {
-                balloonContent: balloonContent
-            }, {
-                preset: "islands#redDotIcon"
-            });
+        const placemark = new ymaps.Placemark(group.coords, {
+            balloonContent: balloonContent
+        }, {
+            preset: "islands#redDotIcon"
+        });
+
         map.geoObjects.add(placemark);
     }
 }
