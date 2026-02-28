@@ -1,52 +1,22 @@
 [
   {
-    "bitrix_id": "150861",
-    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-105?filter=allopenissues[/url]",
-    "map_url": "https://yandex.ru/maps/-/CLxir0J-",
-    "contact_name": "",
-    "contact_phone": "+7 987 822-91-17",
-    "message": "",
-    "organization_name": "ДГП № 69 филиал № 3",
-    "organization_address": "ул. Винокурова, д.14"
+    "id": 84627,
+    "address": "ул. Молодогвардейская, д. 40, корп. 1.",
+    "status": "Требуется выезд"
   },
   {
-    "bitrix_id": "150865",
-    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-239?filter=allopenissues[/url]",
-    "map_url": "[url]https://yandex.ru/maps/-/CLxiFX0d[/url]",
-    "contact_name": "",
-    "contact_phone": "+79057690260",
-    "message": "",
-    "organization_name": "Государственное бюджетное учреждение здравоохранения города Москвы \"Детская городская поликлиника № 110 Департамента здравоохранения города Москвы\"",
-    "organization_address": "город Москва, улица Декабристов, дом 39"
+    "id": 84625,
+    "address": "бул. Яна Райниса, 47",
+    "status": "Требуется выезд"
   },
   {
-    "bitrix_id": "150869",
-    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-240?filter=allopenissues[/url]",
-    "map_url": "[url]https://yandex.ru/maps/-/CLxiyNZz[/url]",
-    "contact_name": "",
-    "contact_phone": "+79262562776",
-    "message": "",
-    "organization_name": "ГБУЗ ДГП № 133 ДЗМ Филиал № 4",
-    "organization_address": "Синявинская ул., 1Б"
+    "id": 84247,
+    "address": "Синявинская ул., 1Б",
+    "status": "Требуется выезд"
   },
   {
-    "bitrix_id": "150875",
-    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-278?filter=allopenissues[/url]",
-    "map_url": "[url]https://yandex.ru/maps/-/CPQPeGoW[/url]",
-    "contact_name": "",
-    "contact_phone": "",
-    "message": "",
-    "organization_name": "",
-    "organization_address": "Молодогвардейская ул., 40, корп. 1"
-  },
-  {
-    "bitrix_id": "150927",
-    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-280[/url]",
-    "map_url": "[url]https://yandex.ru/maps/-/CPeBvB2c[/url]",
-    "contact_name": "",
-    "contact_phone": "+74956012757",
-    "message": "",
-    "organization_name": "ГБУЗ КДЦ № 6 ДЗМ филиал № 7",
-    "organization_address": "Псковская ул., 11, корп. 2"
+    "id": 84248,
+    "address": "ул. Декабристов, 39",
+    "status": "Требуется выезд"
   }
 ]
