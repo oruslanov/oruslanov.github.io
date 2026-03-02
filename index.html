@@ -116,27 +116,19 @@ async function init() {
             balloonContent += `
                 <div class="balloon-task">
                     <b>Заявка #${t.bitrix_id}</b><br>
-
-                    Статус: ${t.status || "—"}<br><br>
-
                     <div>
                         <b>Контакт</b><br>
-
                         Имя: ${t.contact_name ? t.contact_name : "Неизвестно"}<br>
-
                         Телефон: ${
                             phone
                             ? `<a href="tel:${phoneClean}">${phone}</a>`
                             : "Неизвестно"
                         }
                     </div>
-
                     <br>
-
                     <a href="${yandexLink}" target="_blank" class="balloon-btn btn-yandex">
                         📍 Яндекс
                     </a>
-
                     <a href="${bitrixLink}" target="_blank" class="balloon-btn btn-intra">
                         🛠 Битрикс
                     </a>
@@ -159,3 +151,4 @@ async function init() {
 
 </body>
 </html>
+
