@@ -1,12 +1,22 @@
 [
   {
     "bitrix_id": "152819",
-    "jira_url": "",
-    "map_url": "",
-    "contact_name": "",
-    "contact_phone": "",
-    "message": "",
-    "organization_name": "",
-    "organization_address": ""
+    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-303?filter=allopenissues[/url]",
+    "map_url": "[url]https://yandex.ru/maps/-/CPqPmHit[/url]",
+    "contact_name": "Андрианова Елена Алексеевна",
+    "contact_phone": "+7 967 081-07-03",
+    "message": "3 этаж, телевизор у кабинета 319.\n\nПрошу корректно настроить работу телевизора, так как неоднократно наблюдалось его самопроизвольное включение в вечерние часы, когда поликлиника закрыта для посетителей.",
+    "organization_name": "ГБУЗ «ДГП № 98» филиал № 1",
+    "organization_address": "г. Москва, Булатниковский проезд, д. 16А"
+  },
+  {
+    "bitrix_id": "152827",
+    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-304?filter=allopenissues[/url]",
+    "map_url": "[url]https://yandex.ru/maps/-/CPqP5X6a[/url]",
+    "contact_name": "Ширинский Василий Александрович",
+    "contact_phone": "+7 985 826-30-03",
+    "message": "Абсолютно все неттопы данного филиала (подключение кабель) — не транслируется контент.",
+    "organization_name": "ГБУЗ «ГП № 66 ДЗМ»",
+    "organization_address": "г. Москва, ул. Молдагуловой, д. 10А"
   }
 ]
