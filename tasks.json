@@ -18,5 +18,15 @@
     "message": "Неттоп, который транслирует информационные ролики, сильно перегревается и постоянно зависает. Перезагрузка помогает на некоторое время. Просьба установить дополнительное охлаждение на неттоп.",
     "organization_name": "ГБУЗ «ГП № 108 ДЗМ»",
     "organization_address": "г. Москва, ул. Смольная, д. 53"
+  },
+  {
+    "bitrix_id": "153185",
+    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-302[/url]",
+    "map_url": "[url]https://yandex.ru/maps/-/CPuEuA9A[/url]",
+    "contact_name": "Аввакумова Юлия Александровна",
+    "contact_phone": "+7 901 333-51-17",
+    "message": "Не работает электронное табло на первом этаже в зоне ожидания.",
+    "organization_name": "ГБУЗ «ГП № 22 ДЗМ» филиал № 1",
+    "organization_address": "г. Москва, ул. Цюрупы, д. 30/63"
   }
 ]
