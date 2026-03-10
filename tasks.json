@@ -1,32 +1,12 @@
 [
   {
-    "bitrix_id": "152819",
-    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-303?filter=allopenissues[/url]",
-    "map_url": "[url]https://yandex.ru/maps/-/CPqPmHit[/url]",
-    "contact_name": "Андрианова Елена Алексеевна",
-    "contact_phone": "+7 967 081-07-03",
-    "message": "3 этаж, телевизор у кабинета 319.\n\nПрошу корректно настроить работу телевизора, так как неоднократно наблюдалось его самопроизвольное включение в вечерние часы, когда поликлиника закрыта для посетителей.",
-    "organization_name": "ГБУЗ «ДГП № 98» филиал № 1",
-    "organization_address": "г. Москва, Булатниковский проезд, д. 16А"
-  },
-  {
-    "bitrix_id": "152833",
-    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-305?filter=allopenissues[/url]",
-    "map_url": "[url]https://yandex.ru/maps/-/CPqPbCOa[/url]",
-    "contact_name": "Маркичев Владимир Иванович",
-    "contact_phone": "+7 985 333-16-65",
-    "message": "Неттоп, который транслирует информационные ролики, сильно перегревается и постоянно зависает. Перезагрузка помогает на некоторое время. Просьба установить дополнительное охлаждение на неттоп.",
-    "organization_name": "ГБУЗ «ГП № 108 ДЗМ»",
-    "organization_address": "г. Москва, ул. Смольная, д. 53"
-  },
-  {
-    "bitrix_id": "153185",
-    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-302[/url]",
-    "map_url": "[url]https://yandex.ru/maps/-/CPuEuA9A[/url]",
-    "contact_name": "Аввакумова Юлия Александровна",
-    "contact_phone": "+7 901 333-51-17",
-    "message": "Не работает электронное табло на первом этаже в зоне ожидания.",
-    "organization_name": "ГБУЗ «ГП № 22 ДЗМ» филиал № 1",
-    "organization_address": "г. Москва, ул. Цюрупы, д. 30/63"
+    "bitrix_id": "153859",
+    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-308[/url]",
+    "map_url": "[url]https://yandex.ru/maps/-/CPu~aC99[/url]",
+    "contact_name": "Демешонкова Мария Владимировна",
+    "contact_phone": "+7 977 604-45-26",
+    "message": "Не работает телевизор с видеороликами. При включении на экране появляется сообщение: «Нет сигнала, проверьте вход соединения». Через 60 секунд телевизор автоматически отключается.",
+    "organization_name": "ГБУЗ «ДГП № 150 ДЗМ» филиал № 2",
+    "organization_address": "г. Москва, ул. Цимлянская, д. 22"
   }
 ]
