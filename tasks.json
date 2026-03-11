@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "bitrix_id": "154227",
+    "jira_url": "[url]https://jira.mos.social/projects/CONTENTMNGMT/issues/CONTENTMNGMT-311[/url]",
+    "map_url": "[url]https://yandex.ru/maps/-/CPByF0-c[/url]",
+    "contact_name": "",
+    "contact_phone": "Не указан",
+    "message": "Некорректно работает информационное табло с роликами. По утрам зависает: иногда отображается цветной фон, иногда черный экран. Перезагрузка помогает, но каждое утро проблема повторяется. HDMI-кабель меняли, блок СЭС пробовали отключать.",
+    "organization_name": "ГБУЗ «ГП № 109 ДЗМ»",
+    "organization_address": "г. Москва, ул. Гурьянова, д. 4, корп. 3"
+  }
+]
